@@ -1,0 +1,86 @@
+---
+title: "Problem Set 1 - Q2 - Would you try fizzy grape yogurt slush?"
+author: "Chenyang Huan 1004728459"
+date: "Sep.30.2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 2
+# Part a
+
+The goal of this survey is to figure out whether people in  Toronto 
+would like to try MachiMachi's new product, fizzy grape yogurt slush. MachiMachi 
+sells innovative and artsy handmade beverages, it's originally from Taiwan.
+It went famous at the beginning of 2020. This survey could figure out
+the main customer groups and whether people would like to try the new product.
+
+# Part b
+Toronto residents would be target population, frame population would be people
+live in Toronto condos with their names on Toronto condo management profile.
+Sample population would be selected households. We will be using two stage 
+cluster sampling to give out surveys.
+The first stage is randomly select a condo in Toronto. The second stage would be
+randomly selecting some floors and giving out surveys to all residents live on 
+those floors. Print out the survey and put it in mailboxes of these residents.
+After completing the survey and put them in boxed in front of any MachiMachi 
+shop, participants could enter the lottery pool and have a chance to get $100 gift
+card.
+Cluster sampling is cost-saving and efficient and selected residents could 
+fairly represents others and give us an unbiased result and with surveys 
+printed, all age groups could participate since some elders might not be 
+familiar with online survey.
+Drawbacks are people who don't live in condos would be exclude from this, for example students 
+living on campus and people live in houses. Besides, some people might not be
+interested in getting a gift card and won't response. This study would also
+subject to a voluntary bias, since people who like ordering beverages or are fans
+of MachiMachi are more likely to answer this survey.
+# Part c
+
+Here is the link to my survey https://www.surveymonkey.com/r/FVMLN6Y
+
+
+# Part d
+
+1.How often do you buy a drink?
+People who like buying beverages would be potential customers for MachiMachi.
+If they have the habit of getting drinks they will have a higher chance to taste
+the new product than those who don't usually drink beverages. We could study the
+correlation between getting drinks frequency and chances to try new drinks.
+Drawbacks are people who like drinks might not be fancy of fruit slush, for 
+those who usually get coffee or tea and don't like fruit related drinks may not
+by potential customers. Also, consuming sweet drinks could be considered 
+unhealthy and volunteers might undereport their frequency of drinking beverages.
+
+2.How much would you like to pay for a drink?
+Price is an important factor when deciding whether to buy a product or not.
+MachiMachi's price is a little higher than other bubble tea brands, it ranges 
+from \$5 to $10. People who usually spend little on drinks might not spend 
+$8 on the new product in MachiMachi. A drawback would be people who 
+don't buy drinks very often might not consider too much on the price.
+
+3.Are you a fan of Jay Chou?
+Jay Chou is a famous singer in Southeast Asia, he posted MachiMachi drinks a lot on the Instagram since he is a shareholder of this shop. Lots of his fans bought drinks
+from MachiMAchi because of him in order to support their icon. There might be a proportion of customers who purchase the new drink adore Jay. The drawback is
+the question might seem random for those who don't know Jay and never listened his
+songs.
+
+Weakness of this survey: These questions are not specific enough to predict the
+sales of the new product and methods of collecting response is not efficient.
+Next step is to find out what would attract customer the most, such as the bottle, the 
+taste or the appearance. This survey could only give a big picture of general
+potential customers.
+
+
+# Part e
+
+Bibliography:
+
+1. Wu, Changbao, and Mary E. Thompson. "Basic Concepts in Survey Sampling." Sampling Theory and Practice. Springer, Cham, 2020. 3-15.
+
+2. Waclawski, Eugene. "How I use it: Survey monkey." Occupational Medicine 62.6 (2012): 477-477.

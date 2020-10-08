@@ -1,0 +1,157 @@
+---
+title: Problem Set 1 - Q1 - Analysis on Education Level and Income for Those who Earn
+  less than $1000000
+author: "Chenyang Huan 1004728459"
+date: "Sep.30.2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Question 1
+# Part a 
+
+```{r,include=FALSE,echo=FALSE}
+#install.packages("opendatatoronto") #; or 
+#install.packages("devtools")
+#devtools::install_github("sharlagelfand/opendatatoronto") #; or
+#devtools::install_github("hodgettsp/cesR")
+
+library(ggplot2)
+library(cesR)
+library(tidyverse)
+library(dplyr)
+get_ces("ces2019_web")
+colnames(ces2019_web)
+
+```
+
+
+I choose the 2019 Canadian Election Study - Online Survey since this is the most
+current data that we could use to understand Canadian's political behavior and 
+attitudes. Canadian society and political life could be revealed from this 
+dataset. I will be focusing on the relationship between level of education and 
+household income.The data set includes 37822 observations which is enough to 
+make accurate analysis. 
+
+# Part b
+
+
+```{r,echo=FALSE}
+ces2019_web1<-ces2019_web
+unique(ces2019_web1$cps19_education)
+ces2019_web1<-ces2019_web %>% filter(cps19_income_number < 1000000 &cps19_income_number>500)
+ces2019_web1$cps19_education1<-as.character(ces2019_web1$cps19_education)
+ces2019_web1 %>% 
+  ggplot(aes(x=cps19_education1,y=cps19_income_number,fill=cps19_education1))+geom_boxplot()+
+  labs(title="Boxplot of Income by Education Level",caption="2019 Canadian Election Stury - Online Survey dataset",
+       x="Education Level",y="Total Household Income Before Taxes in 2018($)")+theme_classic() +theme(legend.position="")
+                                                            
+
+```
+
+There are lots of outliers in every education level, and they are all right
+skewed. "12" are people who prefer not to say, beside those people, we could see
+a steady pattern of increasing in income with the growth of education 
+level. For people have elementary school as their highest education level, there
+is an approximately $25000 upper limit. The median income for those who have 
+completed college are close to the median income of people completed some 
+university.
+
+
+# Part c
+```{r,include=FALSE}
+options(scipen=999)
+ces2019_web1<-ces2019_web
+summary(ces2019_web1$cps19_income_number)
+ces2019_web1<-ces2019_web1 %>% filter(cps19_income_number < 1000000 &cps19_income_number>500)
+unique(ces2019_web1$cps19_education)
+ces2019_web1$cps19_education1<-as.character(ces2019_web1$cps19_education)
+unique(ces2019_web1$cps19_education1)
+
+```
+```{r,echo=FALSE}
+ces2019_web1 %>% 
+  mutate(cps19_education=as.character(cps19_education1)) %>% 
+  mutate(cps19_education1=case_when(cps19_education1=="1"~"No schooling",
+                                    cps19_education1=="2"~"Elementary School",
+                                    cps19_education1=="3"~"Elementary School",
+                                    cps19_education1=="4"~"High School",
+                                    cps19_education1=="5"~"High School",
+                                    cps19_education1=="6"~"College",
+                                    cps19_education1=="7"~"College",
+                                    cps19_education1=="8"~"University",
+                                    cps19_education1=="9"~"University",
+                                    cps19_education1=="10"~"Master",
+                                    cps19_education1=="11"~"Doctor",
+                                    cps19_education1=="12"~"Don't know/Prefer not to answer"))  %>%        
+  filter(!is.na(cps19_education1)&cps19_education1!="") %>% 
+  group_by(cps19_education1) %>% 
+  summarise(minimum=min(cps19_income_number,na.rm = T),
+            mean=mean(cps19_income_number,na.rm = T),
+            median=median(cps19_income_number,na.rm = T),
+            maximum=max(cps19_income_number,na.rm = T),
+            std=sd(cps19_income_number,na.rm = T))
+            
+```
+
+
+
+Based on the summary of income, the mean and maximum are abnormally large, so I 
+treat the ones that are greater than $100000 as outlier and filter them out. 
+According to Fraser Institute News Release, Canadians who earn more than $96,000
+are in the top 10%, so it's fair to set the upper bound of income as $1,000,000.
+Notice that the minimum wage is zero for all education levels, a $500 lower 
+bound was set to drop meaningless data.
+Initially the educational levels were divided into 12 groups and labeled 
+respectively. In order to reduce the number of rows, I renamed each group and 
+combined similar groups into one category.Surprisingly people who haven't attend
+school earn more than ones who went to high school. The median for people who 
+have completed high school and the ones who had no schooling are $50000 and 
+$71168 respectively. People who didn't attend post-secondary schools couldn't
+get more than $250000 income. People completed college could get a maximum of 
+\$999000  while the maximum income for a doctor is $942600.
+
+
+# Part d
+
+We investigate on the data of household income before tax and level of 
+education and analyze the data using "summurize" by different education level
+groups.
+It's commonly known that the more we learn, the more we earn. By doing the 
+analysis on education levels and income, it's true that with a higher degree we
+could be offered with more salary. Gaining more in the future could be the 
+motivation of learning hard during school. Studying isn't the only way to earn 
+more and improve living standards, but it's a relatively conservative way 
+with high payback.
+
+Weakness of the analysis: There are other lurking variables that would affect
+household income. For example, partner's income, years of working experiences.
+Also, missing data was filtered out.
+
+Next steps for investigating could be making a multivariate model and includes
+those lurking variables.
+
+# Part e
+
+Bibliography:
+
+1. Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 
+2020, '2019 Canadian Election Study - Online Survey',https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+
+2. R Core Team (2020). R: A language and environment for statistical computing. 
+R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+
+3. Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). 
+dplyr: A Grammar of Data  Manipulation. R package version 1.0.2. https://CRAN.R-project.org/package=dplyr
+  
+4. H. Wickham. ggplot2: Elegant Graphics for Data Analysis. Springer-Verlag New 
+York, 2016.
+
+5. Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make
+  Developing R Packages Easier. R package version 2.3.2.
+  https://CRAN.R-project.org/package=devtools
